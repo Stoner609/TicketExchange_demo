@@ -1,0 +1,41 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css') 
+    script.
+      A= function() {
+        fetch('http://localhost:3000/product')
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(myJson) {
+          console.log(myJson);
+        })
+      }
+      B= function() {
+        fetch('http://localhost:3000/user', {
+          //- method: 'get',
+          //- headers: {
+          //-   Authorization: 213
+          //- }
+          method: 'post',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({account: 's', password: '1234'})
+        })
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(myJson) {
+          console.log(myJson);
+        })
+      }
+
+      window.onload = function () {
+        B()
+      }
+  body
+    block content
