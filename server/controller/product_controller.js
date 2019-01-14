@@ -8,7 +8,7 @@ module.exports = {
     lo_returnClass.description = "產品列表";
 
     try {
-      let Productlist = await ProductService.getProductList();
+      let Productlist = await ProductService.getProductsHandler();
       lo_returnClass = {
         ...lo_returnClass,
         Productlist
@@ -17,6 +17,6 @@ module.exports = {
       lo_returnClass = lo_returnClass.errorHandler(error);
     }
 
-    res.json(lo_returnClass);
+    res.status(200).json(lo_returnClass);
   }
 };

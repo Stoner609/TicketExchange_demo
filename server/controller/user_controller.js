@@ -2,14 +2,18 @@ const UserService = require("../service/user_service");
 const returnClass = require("../rule/returnClass");
 
 module.exports = {
-  /* 撈會員資料 */
-  // 依照 request 的 cookies 或者 localSession other 來抓會員資料
-  userProfile: async (req, res) => {
+  /* token 解析 */
+  verfiyToken: async (req, res) => {
     let lo_returnClass = new returnClass();
-    lo_returnClass.description = "會員資料";
+    lo_returnClass.description = "token";
     try {
-      const lo_result = await UserService.getUserData(req.cookies.athenaToken);
-      console.log(lo_result);
+      let token =
+        req.cookies.athenaToken ||
+        req.query.token ||
+        req.headers["x-access-token"];
+
+      const lo_result = await UserService.verfiyTokenHandler(token);
+
       lo_returnClass = {
         ...lo_returnClass,
         message: "Hello!",
@@ -22,7 +26,31 @@ module.exports = {
       lo_returnClass = lo_returnClass.errorHandler(error);
     }
 
-    res.json(lo_returnClass);
+    res.status(200).json(lo_returnClass);
+  },
+
+  /* 讀取會員資料 */
+  userProfile: async (req, res) => {
+    let lo_returnClass = new returnClass();
+    lo_returnClass.description = "會員資料";
+    try {
+      let token =
+        req.cookies.athenaToken ||
+        req.query.token ||
+        req.headers["x-access-token"];
+
+      const tokenData = await UserService.verfiyTokenHandler(token);
+      const userProfile = await UserService.getUserHandler(tokenData);
+
+      lo_returnClass = {
+        ...lo_returnClass,
+        message: "UserProfileA",
+        userProfile
+      };
+    } catch (error) {
+      lo_returnClass = lo_returnClass.errorHandler(error);
+    }
+    res.status(200).json(lo_returnClass);
   },
 
   /* 會員登入 */
@@ -30,7 +58,7 @@ module.exports = {
     let lo_returnClass = new returnClass();
     lo_returnClass.description = "會員登入";
     try {
-      const lo_result = await UserService.login(req.body);
+      const lo_result = await UserService.loginHandler(req.body);
 
       lo_returnClass = {
         ...lo_returnClass,
@@ -41,7 +69,12 @@ module.exports = {
       lo_returnClass = lo_returnClass.errorHandler(error);
     }
 
-    res.json(lo_returnClass);
+    res.status(200).json(lo_returnClass);
+  },
+
+  /* 會員登出 */
+  logout: (req, res) => {
+    // todo...?
   },
 
   /* 新增會員資料 */
@@ -49,7 +82,7 @@ module.exports = {
     let lo_returnClass = new returnClass();
     lo_returnClass.description = "新增會員資料";
     try {
-      const lo_result = await UserService.insertUserData(req.body);
+      const lo_result = await UserService.insertHandler(req.body);
       lo_returnClass = {
         ...lo_returnClass,
         message: "User is Successfully Inserted"
@@ -58,6 +91,6 @@ module.exports = {
       lo_returnClass = lo_returnClass.errorHandler(error);
     }
 
-    res.json(lo_returnClass);
+    res.status(200).json(lo_returnClass);
   }
 };
