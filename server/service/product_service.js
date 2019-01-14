@@ -6,7 +6,7 @@ module.exports = {
       Product.find({}, (err, data) => {
         if (err) reject(new Error(err));
         if (data === null) {
-          resolve(0);
+          resolve(null);
         } else {
           resolve(data);
         }

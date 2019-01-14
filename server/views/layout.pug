@@ -13,8 +13,10 @@ html
           console.log(myJson);
         })
       }
+
+      // test 登入
       B= function() {
-        fetch('http://localhost:3000/user', {
+        fetch('http://localhost:3000/login', {
           //- method: 'get',
           //- headers: {
           //-   Authorization: 213
@@ -24,18 +26,38 @@ html
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({account: 's', password: '1234'})
+          body: JSON.stringify({account: 's', password: '123'})
         })
         .then(function(response) {
           return response.json();
         })
         .then(function(myJson) {
           console.log(myJson);
+          document.cookie = "athenaToken=" + myJson.token;
         })
       }
 
+      // test 解析cookie
+      C= function(name) {
+        var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+        return v ? v[2] : null;
+      }
+
+      D= function() {
+        fetch('http://localhost:3000/user', {
+          method: 'get'
+        })
+        .then(res => res.json())
+        .then(myJson => {
+          console.log(myJson);
+        });
+
+      }
+
       window.onload = function () {
-        B()
+        //- B();
+        console.log(C('athenaToken'))
+        D();
       }
   body
     block content

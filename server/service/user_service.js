@@ -3,9 +3,13 @@ const User = require("../model/user_model");
 require("dotenv").config();
 
 module.exports = {
-  getUserData: userObject => {
+  getUserData: userToken => {
     return new Promise((resolve, reject) => {
-      // let ver = jwt.verify(token, process.env.SECRET);
+      let ver = jwt.verify(userToken, process.env.SECRET);
+      if (typeof ver !==  'object') {
+        reject("Token is Expired");
+      }
+      resolve(ver);
     });
   },
 
@@ -23,11 +27,7 @@ module.exports = {
         (err, data) => {
           if (err) reject(new Error(err));
           if (data === null) {
-            resolve({
-              success: false,
-              message: "Authenticate failed. User not found",
-              token: null
-            });
+            reject("Authenticate failed. User not found");
           } else {
             const { account, firstname, lastname } = data;
             let token = jwt.sign(
@@ -36,15 +36,10 @@ module.exports = {
                 firstname,
                 lastname
               },
-              process.env.SECRET
+              process.env.SECRET,
+              { expiresIn: "1h" }
             );
-            let returnClass = {
-              success: true,
-              message: "Enjoy your token",
-              token
-            };
-
-            resolve(returnClass);
+            resolve(token);
           }
         }
       );
@@ -56,7 +51,7 @@ module.exports = {
     return new Promise((resolve, reject) => {
       const user = new User(userObject);
       user.save((err, data) => {
-        if (err) reject(err);
+        if (err) reject(new Error(err));
         resolve(data);
       });
     });

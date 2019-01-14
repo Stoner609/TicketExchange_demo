@@ -1,16 +1,22 @@
 const ProductService = require("../service/product_service");
+const returnClass = require("../rule/returnClass");
 
 module.exports = {
   /* 撈產品列表資料 */
   productList: async (req, res) => {
+    let lo_returnClass = new returnClass();
+    lo_returnClass.description = "產品列表";
+
     try {
       let Productlist = await ProductService.getProductList();
-      res.json({
-        Productlist,
-        Description: "產品列表"
-      });
+      lo_returnClass = {
+        ...lo_returnClass,
+        Productlist
+      };
     } catch (error) {
-      res.json(error.message);
+      lo_returnClass = lo_returnClass.errorHandler(error);
     }
+
+    res.json(lo_returnClass);
   }
 };
