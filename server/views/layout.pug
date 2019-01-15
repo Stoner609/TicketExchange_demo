@@ -17,10 +17,6 @@ html
       // test 登入
       B= function() {
         fetch('http://localhost:3000/login', {
-          //- method: 'get',
-          //- headers: {
-          //-   Authorization: 213
-          //- }
           method: 'post',
           headers: {
             'Accept': 'application/json',
@@ -45,7 +41,10 @@ html
 
       D= function() {
         fetch('http://localhost:3000/user', {
-          method: 'get'
+          method: 'get',
+          headers: {
+            Authorization: 'Bearer ' + C('athenaToken')
+          }
         })
         .then(res => res.json())
         .then(myJson => {

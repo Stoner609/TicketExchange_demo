@@ -6,14 +6,16 @@ module.exports = {
   verfiyTokenAndUser: async (req, res, next) => {
     let lo_returnClass = new returnClass();
     try {
-      let token =
-        req.cookies.athenaToken ||
-        req.query.token ||
-        req.headers["x-access-token"];
+      const header = req.headers["authorization"];
+      if (typeof header !== "undefined") {
+        const bearer = header.split(" ");
+        const token = bearer[1];
+        req.token = token;
 
-      const tokenData = await UserService.verfiyTokenHandler(token);
-      if (tokenData) {
-        next();
+        const tokenData = await UserService.verfiyTokenHandler(token);
+        if (tokenData) {
+          next();
+        }
       }
     } catch (error) {
       lo_returnClass = lo_returnClass.errorHandler(error);
