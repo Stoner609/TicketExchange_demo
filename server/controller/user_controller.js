@@ -84,10 +84,33 @@ module.exports = {
     lo_returnClass.description = "新增會員資料";
     try {
       const lo_result = await UserService.insertHandler(req.body);
-      lo_returnClass = {
-        ...lo_returnClass,
-        message: "User is Successfully Inserted"
-      };
+      if (lo_result) {
+        lo_returnClass = {
+          ...lo_returnClass,
+          message: "User is Successfully Inserted"
+        };
+      }
+    } catch (error) {
+      lo_returnClass = lo_returnClass.errorHandler(error);
+    }
+
+    res.status(200).json(lo_returnClass);
+  },
+
+  /* 修改會員資料 */
+  updateUser: async (req, res) => {
+    let lo_returnClass = new returnClass();
+    lo_returnClass.description = "修改會員資料";
+    try {
+      let userId = req.session._id;
+      let userData = req.body;
+      const lo_result = await UserService.updateHandler(userId, userData);
+      if (lo_result) {
+        lo_returnClass = {
+          ...lo_returnClass,
+          message: "User is Successfully Updated"
+        };
+      }
     } catch (error) {
       lo_returnClass = lo_returnClass.errorHandler(error);
     }

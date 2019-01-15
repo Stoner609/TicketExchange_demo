@@ -17,6 +17,12 @@ router.get("/user/token", UserController.verfiyToken);
 /* POST 新增會員資料 */
 router.post("/user/insert", UserController.insertUser);
 
+router.post(
+  "/user/update",
+  UserMiddleware.verfiyTokenAndUser,
+  UserController.updateUser
+);
+
 /* POST 會員登入 */
 router.post("/login", UserController.login);
 

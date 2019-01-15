@@ -84,7 +84,16 @@ module.exports = {
       const user = new User(userObject);
       user.save((err, data) => {
         if (err) reject(new Error(err));
-        resolve(data);
+        resolve(true);
+      });
+    });
+  },
+
+  updateHandler: (id, userObject) => {
+    return new Promise((resolve, reject) => {
+      User.findOneAndUpdate({ _id: id }, userObject, (err, data) => {
+        if (err) reject(new Error(err));
+        resolve(true);
       });
     });
   }
