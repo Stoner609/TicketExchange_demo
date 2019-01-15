@@ -2,9 +2,10 @@
 
 ## 設定檔
 DB_URL=<連線位置>
+
 SECRET=<簽名>
 
-## 
+## 功能
 會員
  - 會員註冊
  - 會員登入/登出
@@ -16,3 +17,10 @@ SECRET=<簽名>
  - 產品資料
  - 新增產品
  - 移除產品
+
+ ## 使用套件
+ - express
+ - cors
+ - dotenv
+ - jsonwebtoken
+ - mongoose
