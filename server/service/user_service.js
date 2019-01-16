@@ -9,6 +9,7 @@ module.exports = {
       const ver = jwt.verify(token, process.env.SECRET);
       if (typeof ver !== "object") {
         reject("Token is Expired");
+        return;
       }
       resolve(ver);
     });
@@ -35,9 +36,9 @@ module.exports = {
         },
         selectQuery.join(" "),
         (err, data) => {
-          if (err) reject(new Error(err));
-          if (data === null) {
-            reject("Authenticate failed. User not found");
+          if (err) {
+            reject(new Error("Authenticate failed. User not found"));
+            return;
           }
           resolve(data);
         }
@@ -83,16 +84,25 @@ module.exports = {
     return new Promise((resolve, reject) => {
       const user = new User(userObject);
       user.save((err, data) => {
-        if (err) reject(new Error(err));
+        if (err) {
+          reject(new Error(err));
+          return;
+        }
+
         resolve(true);
+        return;
       });
     });
   },
 
+  /* 修改會員資料 */
   updateHandler: (id, userObject) => {
     return new Promise((resolve, reject) => {
       User.findOneAndUpdate({ _id: id }, userObject, (err, data) => {
-        if (err) reject(new Error(err));
+        if (err) {
+          reject(new Error("not found"));
+          return;
+        }
         resolve(true);
       });
     });

@@ -1,0 +1,9 @@
+{
+    "name": "ticketexchange",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+      "start": "node ./server/bin/www"
+    }
+  }
+  
