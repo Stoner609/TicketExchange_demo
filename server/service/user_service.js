@@ -107,9 +107,13 @@ module.exports = {
   },
 
   /* 修改會員資料 */
-  updateHandler: (id, userObject) => {
+  updateHandler: (session, userObject) => {
     return new Promise((resolve, reject) => {
-      User.findOneAndUpdate({ _id: id }, userObject, (err, data) => {
+      const { _id, account } = session;
+      User.findOneAndUpdate({ _id, account }, {
+        ...userObject,
+        account
+      }, (err, data) => {
         if (err) {
           reject(new Error("not found"));
           return;

@@ -21,6 +21,7 @@ router.post(
   UserController.insertUser
 );
 
+/* POST 更新會員資料 */
 router.post(
   "/user/update",
   UserMiddleware.verfiyTokenAndUser,

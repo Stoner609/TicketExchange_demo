@@ -14,7 +14,8 @@ module.exports = {
 
         const tokenData = await UserService.verfiyTokenHandler(token);
         req.session = {
-          _id: tokenData._id
+          _id: tokenData._id,
+          account: tokenData.account
         };
         if (tokenData) {
           next();

@@ -102,9 +102,9 @@ module.exports = {
     let lo_returnClass = new returnClass();
     lo_returnClass.description = "修改會員資料";
     try {
-      let userId = req.session._id;
+      let session = req.session;
       let userData = req.body;
-      const lo_result = await UserService.updateHandler(userId, userData);
+      const lo_result = await UserService.updateHandler(session, userData);
       if (lo_result) {
         lo_returnClass = {
           ...lo_returnClass,
