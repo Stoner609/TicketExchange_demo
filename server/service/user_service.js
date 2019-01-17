@@ -15,6 +15,19 @@ module.exports = {
     });
   },
 
+  /* 查詢帳號 */
+  verifyAccount: account => {
+    return new Promise((resolve, reject) => {
+      User.findOne({ account }, (err, data) => {
+        if (data == null) {
+          resolve(true);
+          return;
+        }
+        reject("帳號已存在");
+      });
+    });
+  },
+
   /* 會員資料 */
   getUserHandler: userObject => {
     return new Promise((resolve, reject) => {
@@ -88,9 +101,7 @@ module.exports = {
           reject(new Error(err));
           return;
         }
-
         resolve(true);
-        return;
       });
     });
   },

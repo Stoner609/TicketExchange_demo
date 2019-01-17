@@ -5,6 +5,7 @@ const userSchema = new mongoose.Schema(
   {
     account: {
       type: String,
+      unique: true, 
       required: [true, "帳號不可為空白"]
     },
     password: {

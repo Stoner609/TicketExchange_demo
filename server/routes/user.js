@@ -15,7 +15,11 @@ router.get(
 router.get("/user/token", UserController.verfiyToken);
 
 /* POST 新增會員資料 */
-router.post("/user/insert", UserController.insertUser);
+router.post(
+  "/user/insert",
+  UserMiddleware.verfiyAccount,
+  UserController.insertUser
+);
 
 router.post(
   "/user/update",
