@@ -79,7 +79,7 @@ module.exports = {
   },
 
   /* 新增會員資料 */
-  insertUser: async (req, res) => {
+  singup: async (req, res) => {
     let lo_returnClass = new returnClass();
     lo_returnClass.description = "新增會員資料";
     try {
@@ -117,4 +117,7 @@ module.exports = {
 
     res.status(200).json(lo_returnClass);
   }
+
+  /* 修改密碼 */
+  /* 忘記密碼 */
 };

@@ -16,9 +16,9 @@ router.get("/user/token", UserController.verfiyToken);
 
 /* POST 新增會員資料 */
 router.post(
-  "/user/insert",
+  "/user/singup",
   UserMiddleware.verfiyAccount,
-  UserController.insertUser
+  UserController.singup
 );
 
 /* POST 更新會員資料 */
