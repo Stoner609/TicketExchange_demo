@@ -22,7 +22,7 @@ module.exports = {
       }
     } catch (error) {
       lo_returnClass = lo_returnClass.errorHandler(error);
-      res.status(404).json(lo_returnClass);
+      res.status(200).json(lo_returnClass);
     }
   },
 
@@ -37,7 +37,7 @@ module.exports = {
       }
     } catch (error) {
       lo_returnClass = lo_returnClass.errorHandler(error);
-      res.status(404).json(lo_returnClass);
+      res.status(200).json(lo_returnClass);
     }
   }
 };
