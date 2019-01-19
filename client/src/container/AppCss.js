@@ -4,6 +4,8 @@ const AppDiv = styled.div`
   text-align: center;
 `;
 
+const AppP = styled.p``;
+
 const AppHeader = styled.header`
   background-color: #282c34;
   min-height: 100vh;
@@ -33,13 +35,4 @@ const AppLink = styled.a`
   color: #61dafb;
 `;
 
-// @keyframes App-logo-spin {
-//     from {
-//       transform: rotate(0deg);
-//     }
-//     to {
-//       transform: rotate(360deg);
-//     }
-//   }
-
-export { AppDiv, AppLogo, AppHeader, AppLink };
+export { AppDiv, AppP, AppLogo, AppHeader, AppLink };
