@@ -1,13 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from "react";
 
 export class login extends Component {
   render() {
-    return (
-      <div>
-        login
-      </div>
-    )
+    return <Fragment>login</Fragment>;
   }
 }
 
-export default login
+export default login;
