@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+
 import { AppDiv } from "./AppCss";
 
 import Haeder from "../components/Header/Header";
@@ -21,12 +23,14 @@ class App extends Component {
 
   render() {
     return (
-      <AppDiv>
-        <Haeder />
-        <Navbar />
-        <Main />
-        <Footer />
-      </AppDiv>
+      <Router>
+        <AppDiv>
+          <Haeder />
+          <Navbar />
+          <Main />
+          <Footer />
+        </AppDiv>
+      </Router>
     );
   }
 }
