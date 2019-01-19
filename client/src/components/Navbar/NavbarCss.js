@@ -6,7 +6,7 @@ const Navbar = styled.div`
   background-color: #333;
 `;
 
-const NavbarLink = styled.a`
+const NavbarLink = styled(Link)`
   float: left;
   display: block;
   color: white;

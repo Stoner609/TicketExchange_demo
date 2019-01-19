@@ -5,7 +5,7 @@ import { AppDiv } from "./AppCss";
 
 import Haeder from "../components/Header/Header";
 import Navbar from "../components/Navbar/Navbar";
-import Main from "../components/Main/Main";
+import Wrap from "../components/Wrap/Wrap";
 import Footer from "../components/Footer/Footer";
 
 class App extends Component {
@@ -27,7 +27,7 @@ class App extends Component {
         <AppDiv>
           <Haeder />
           <Navbar />
-          <Main />
+          <Wrap />
           <Footer />
         </AppDiv>
       </Router>

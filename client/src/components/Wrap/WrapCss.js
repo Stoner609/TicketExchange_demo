@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-const MainDiv = styled.div`
+const WrapDiv = styled.div`
   flex: 1;
 `;
 
-export { MainDiv };
+export { WrapDiv };
