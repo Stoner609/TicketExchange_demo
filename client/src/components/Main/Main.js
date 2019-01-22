@@ -4,7 +4,7 @@ import { Route } from "react-router-dom";
 import { MainDiv } from "./MainCss";
 
 import Index from "./Index";
-import Login from "./Login";
+import Login from "./Login/Login";
 
 const Main = props => {
   return (

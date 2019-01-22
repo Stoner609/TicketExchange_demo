@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 
 class Index extends Component {
   constructor(props) {
@@ -8,7 +8,7 @@ class Index extends Component {
     };
   }
   render() {
-    return <div>{this.state.title}</div>;
+    return <Fragment>{this.state.title}</Fragment>;
   }
 }
 
