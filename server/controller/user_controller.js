@@ -34,14 +34,7 @@ module.exports = {
     let lo_returnClass = new returnClass();
     lo_returnClass.description = "會員資料";
     try {
-      // const header = req.headers["authorization"];
-      let token =
-        req.cookies.athenaToken ||
-        req.query.token ||
-        req.headers["x-access-token"];
-
-      const tokenData = await UserService.verfiyTokenHandler(token);
-      const userProfile = await UserService.getUserHandler(tokenData);
+      const userProfile = await UserService.getUserHandler(req.session);
 
       lo_returnClass = {
         ...lo_returnClass,
