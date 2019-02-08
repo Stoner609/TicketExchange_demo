@@ -38,7 +38,7 @@ module.exports = {
 
       lo_returnClass = {
         ...lo_returnClass,
-        message: "UserProfileA",
+        message: "UserProfile",
         userProfile
       };
     } catch (error) {

@@ -6,12 +6,12 @@ module.exports = {
   /* token 解析 */
   verfiyTokenHandler: token => {
     return new Promise((resolve, reject) => {
-      const ver = jwt.verify(token, process.env.SECRET);
-      if (typeof ver !== "object") {
+      const auth = jwt.verify(token, process.env.SECRET);
+      if (typeof auth !== "object") {
         reject("Token is Expired");
-        return;
+      } else {
+        resolve(auth);
       }
-      resolve(ver);
     });
   },
 
@@ -21,9 +21,9 @@ module.exports = {
       User.findOne({ account }, (err, data) => {
         if (data == null) {
           resolve(true);
-          return;
+        } else {
+          reject("帳號已存在");
         }
-        reject("帳號已存在");
       });
     });
   },
@@ -51,9 +51,9 @@ module.exports = {
         (err, data) => {
           if (err) {
             reject(new Error("Authenticate failed. User not found"));
-            return;
+          } else {
+            resolve(data);
           }
-          resolve(data);
         }
       );
     });
@@ -99,9 +99,9 @@ module.exports = {
       user.save((err, data) => {
         if (err) {
           reject(new Error(err));
-          return;
+        } else {
+          resolve(true);
         }
-        resolve(true);
       });
     });
   },
@@ -110,16 +110,20 @@ module.exports = {
   updateHandler: (session, userObject) => {
     return new Promise((resolve, reject) => {
       const { _id, account } = session;
-      User.findOneAndUpdate({ _id, account }, {
-        ...userObject,
-        account
-      }, (err, data) => {
-        if (err) {
-          reject(new Error("not found"));
-          return;
+      User.findOneAndUpdate(
+        { _id, account },
+        {
+          ...userObject,
+          account
+        },
+        (err, data) => {
+          if (err) {
+            reject(new Error("not found"));
+            return;
+          }
+          resolve(true);
         }
-        resolve(true);
-      });
+      );
     });
   }
 };
