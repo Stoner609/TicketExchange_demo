@@ -1,10 +1,10 @@
 import React from "react";
-import { FootDiv, FooterHTwo } from "./FootCss";
+import FootDiv from "./FootCss";
 
 const Footer = props => {
   return (
     <FootDiv>
-      <FooterHTwo>Footer</FooterHTwo>
+      <h2>Footer</h2>
     </FootDiv>
   );
 };

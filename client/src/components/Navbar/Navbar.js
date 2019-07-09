@@ -1,11 +1,12 @@
 import React from "react";
-import { Navbar, NavbarLink, NavbarLinkRight } from "./NavbarCss";
+import Navbar from "./NavbarCss";
+import { Link } from "react-router-dom";
 
 const NavBar = props => {
   return (
     <Navbar>
-      <NavbarLink to="/">首頁</NavbarLink>
-      <NavbarLinkRight to="/login">登入/註冊</NavbarLinkRight>
+      <Link to="/">首頁</Link>
+      <Link to="/login">登入/註冊</Link>
     </Navbar>
   );
 };

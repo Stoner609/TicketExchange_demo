@@ -1,11 +1,11 @@
 import React from "react";
-import { HeadDiv, HeadHOne, HeadP } from "./HeaderCss";
+import HeadDiv from "./HeaderCss";
 
 const Header = props => {
   return (
     <HeadDiv>
-      <HeadHOne>My Website</HeadHOne>
-      <HeadP>A website created by me.</HeadP>
+      <h1>My Website</h1>
+      <p>A website created by me.</p>
     </HeadDiv>
   );
 };

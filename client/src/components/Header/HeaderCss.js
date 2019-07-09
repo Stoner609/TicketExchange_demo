@@ -5,13 +5,10 @@ const HeadDiv = styled.div`
   text-align: center;
   background: #1abc9c;
   color: white;
+
+  h1 {
+    font-size: 40px;  
+  }
 `;
 
-const HeadHOne = styled.h1`
-  font-size: 40px;
-`;
-
-const HeadP = styled.p`
-`
-
-export { HeadDiv, HeadHOne, HeadP };
+export default HeadDiv;

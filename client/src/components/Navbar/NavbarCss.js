@@ -4,23 +4,20 @@ import { Link } from "react-router-dom";
 const Navbar = styled.div`
   overflow: hidden;
   background-color: #333;
-`;
 
-const NavbarLink = styled(Link)`
-  float: left;
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 20px;
-  text-decoration: none;
-  :hover {
-    background-color: #ddd;
-    color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  a {
+    padding: 14px 20px;
+    color: white;
+    text-decoration: none;
+    &:hover {
+      background-color: #ddd;
+      color: black;
+    }
   }
 `;
 
-const NavbarLinkRight = styled(NavbarLink)`
-  float: right;
-`;
-
-export { Navbar, NavbarLink, NavbarLinkRight };
+export default Navbar;

@@ -6,6 +6,4 @@ const FootDiv = styled.div`
   background: #ddd;
 `;
 
-const FooterHTwo = styled.h2``;
-
-export { FootDiv, FooterHTwo };
+export default FootDiv;
