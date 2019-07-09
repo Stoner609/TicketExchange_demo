@@ -18,12 +18,10 @@ module.exports = {
           _id: tokenData._id,
           account: tokenData.account
         };
-        if (tokenData) {
-          next();
-        }
+        next();
       }
     } catch (error) {
-      lo_returnClass = lo_returnClass.errorHandler(error);
+      lo_returnClass.errorHandler(error);
       res.status(200).json(lo_returnClass);
     }
   },

@@ -35,15 +35,13 @@ module.exports = {
 
     try {
       const userProfile = await UserService.getUserHandler(req.session);
-
-      lo_returnClass = {
-        ...lo_returnClass,
-        message: "UserProfile",
+      lo_returnClass.successHandler("UserProfile", {
         userProfile
-      };
+      });
     } catch (error) {
-      lo_returnClass = lo_returnClass.errorHandler(error);
+      lo_returnClass.errorHandler(error);
     }
+
     res.status(200).json(lo_returnClass);
   },
 
@@ -53,7 +51,6 @@ module.exports = {
 
     try {
       const getToken = await UserService.loginHandler(req.body);
-
       lo_returnClass.successHandler("Enjoy your token", {
         token: getToken
       });

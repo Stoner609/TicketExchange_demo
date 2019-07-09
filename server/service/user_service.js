@@ -42,6 +42,7 @@ module.exports = {
         "address"
       ];
       const { _id, account } = userObject;
+
       User.findOne(
         {
           _id,
