@@ -4,8 +4,7 @@ const returnClass = require("../rule/returnClass");
 module.exports = {
   /* 撈產品列表資料 */
   productList: async (req, res) => {
-    let lo_returnClass = new returnClass();
-    lo_returnClass.description = "產品列表";
+    let lo_returnClass = new returnClass('產品列表');
 
     try {
       let Productlist = await ProductService.getProductsHandler();

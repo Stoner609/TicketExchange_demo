@@ -100,7 +100,7 @@ module.exports = {
         if (err) {
           reject(new Error(err));
         } else {
-          resolve(true);
+          resolve();
         }
       });
     });

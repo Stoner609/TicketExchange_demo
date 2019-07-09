@@ -1,20 +1,26 @@
 class returnClass {
   constructor(props) {
+    console.log(props);
     this.success = true;
+    this.description = props;
     this.message = "";
-    this.description = "";
+    this.data = {};
   }
 
-  successHandler() {
-
+  successHandler(message, data = null) {
+    this.message = message;
+    if (data != null) this.data = data;
   }
 
-  errorHandler(error) {
-    return {
-      ...this,
-      success: false,
-      message: error.message || error
-    }
+  errorHandler(error, data = null) {
+    // return {
+    //   ...this,
+    //   success: false,
+    //   message: error.message || error
+    // }
+    this.success = false;
+    this.message = error.message || error
+    if (data != null) this.data = data;
   }
 }
 

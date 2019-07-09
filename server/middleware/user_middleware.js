@@ -4,7 +4,8 @@ const returnClass = require("../rule/returnClass");
 module.exports = {
   /* token 解析、會員檢查是否存在 */
   verfiyTokenAndUser: async (req, res, next) => {
-    let lo_returnClass = new returnClass();
+    let lo_returnClass = new returnClass('verfiyTokenAndUser');
+
     try {
       const header = req.headers["authorization"];
       if (typeof header !== "undefined") {
@@ -29,10 +30,12 @@ module.exports = {
 
   /* 檢查帳號是否重複 */
   verfiyAccount: async (req, res, next) => {
-    let lo_returnClass = new returnClass();
+    let lo_returnClass = new returnClass('verfiyAccount');
+
     try {
-      let { account } = req.body;
+      const { account } = req.body;
       const lo_result = await UserService.verifyAccount(account);
+
       if (lo_result) {
         next();
       }
