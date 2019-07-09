@@ -20,7 +20,7 @@ module.exports = {
     return new Promise((resolve, reject) => {
       User.findOne({ account }, (err, data) => {
         if (data == null) {
-          resolve(true);
+          resolve();
         } else {
           reject("帳號已存在");
         }

@@ -35,12 +35,9 @@ module.exports = {
     try {
       const { account } = req.body;
       const lo_result = await UserService.verifyAccount(account);
-
-      if (lo_result) {
-        next();
-      }
+      next();
     } catch (error) {
-      lo_returnClass = lo_returnClass.errorHandler(error);
+      lo_returnClass.errorHandler(error);
       res.status(200).json(lo_returnClass);
     }
   }
