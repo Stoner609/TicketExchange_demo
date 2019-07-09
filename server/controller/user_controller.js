@@ -52,15 +52,13 @@ module.exports = {
     let lo_returnClass = new returnClass('會員登入');
 
     try {
-      const lo_result = await UserService.loginHandler(req.body);
+      const getToken = await UserService.loginHandler(req.body);
 
-      lo_returnClass = {
-        ...lo_returnClass,
-        message: "Enjoy your token",
-        token: lo_result
-      };
+      lo_returnClass.successHandler("Enjoy your token", {
+        token: getToken
+      });
     } catch (error) {
-      lo_returnClass = lo_returnClass.errorHandler(error);
+      lo_returnClass.errorHandler(error);
     }
 
     res.status(200).json(lo_returnClass);

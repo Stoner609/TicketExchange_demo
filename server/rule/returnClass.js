@@ -3,7 +3,6 @@ class returnClass {
     this.success = true;
     this.description = props;
     this.message = "";
-    // this.data = {};
   }
 
   successHandler(message, data = null) {
