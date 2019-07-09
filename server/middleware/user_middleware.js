@@ -32,7 +32,7 @@ module.exports = {
 
     try {
       const { account } = req.body;
-      const lo_result = await UserService.verifyAccount(account);
+      await UserService.verifyAccount(account);
       next();
     } catch (error) {
       lo_returnClass.errorHandler(error);

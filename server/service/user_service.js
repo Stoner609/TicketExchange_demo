@@ -57,7 +57,7 @@ module.exports = {
           }
         }
       );
-      
+
     });
   },
 
@@ -118,12 +118,13 @@ module.exports = {
           ...userObject,
           account
         },
+        { new: true },
         (err, data) => {
           if (err) {
             reject(new Error("not found"));
-            return;
+          } else {
+            resolve(data);
           }
-          resolve(true);
         }
       );
     });

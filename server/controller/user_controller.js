@@ -19,7 +19,7 @@ module.exports = {
           lastname: lo_result.lastname
         }
       });
-      
+
     } catch (error) {
       lo_returnClass.errorHandler(error);
     }
@@ -83,17 +83,15 @@ module.exports = {
     let lo_returnClass = new returnClass('修改會員資料');
 
     try {
-      let session = req.session;
-      let userData = req.body;
-      const lo_result = await UserService.updateHandler(session, userData);
-      if (lo_result) {
-        lo_returnClass = {
-          ...lo_returnClass,
-          message: "User is Successfully Updated"
-        };
-      }
+      const session = req.session;
+      const userData = req.body;
+      const getUpdate = await UserService.updateHandler(session, userData);
+
+      lo_returnClass.successHandler("User is Successfully Updated", { 
+        userProfile: getUpdate
+      });
     } catch (error) {
-      lo_returnClass = lo_returnClass.errorHandler(error);
+      lo_returnClass.errorHandler(error);
     }
 
     res.status(200).json(lo_returnClass);
