@@ -6,7 +6,6 @@ module.exports = {
   verfiyToken: async (req, res) => {
     try {
       let lo_returnClass = new returnClass('token');
-      
       let token =
         req.cookies.athenaToken ||
         req.query.token ||
@@ -14,16 +13,15 @@ module.exports = {
 
       const lo_result = await UserService.verfiyTokenHandler(token);
 
-      lo_returnClass = {
-        ...lo_returnClass,
-        message: "Hello!",
+      lo_returnClass.successHandler("Hello", {
         userProfile: {
           firstname: lo_result.firstname,
           lastname: lo_result.lastname
         }
-      };
+      });
+      
     } catch (error) {
-      lo_returnClass = lo_returnClass.errorHandler(error);
+      lo_returnClass.errorHandler(error);
     }
 
     res.status(200).json(lo_returnClass);
