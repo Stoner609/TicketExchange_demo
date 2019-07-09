@@ -7,13 +7,12 @@ module.exports = {
     let lo_returnClass = new returnClass('產品列表');
 
     try {
-      let Productlist = await ProductService.getProductsHandler();
-      lo_returnClass = {
-        ...lo_returnClass,
+      const Productlist = await ProductService.getProductsHandler();
+      lo_returnClass.successHandler("Products list", {
         Productlist
-      };
+      })
     } catch (error) {
-      lo_returnClass = lo_returnClass.errorHandler(error);
+      lo_returnClass.errorHandler(error);
     }
 
     res.status(200).json(lo_returnClass);
