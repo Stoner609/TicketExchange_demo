@@ -4,8 +4,9 @@ const returnClass = require("../rule/returnClass");
 module.exports = {
   /* token 解析 */
   verfiyToken: async (req, res) => {
+    let lo_returnClass = new returnClass('token');
+    
     try {
-      let lo_returnClass = new returnClass('token');
       let token =
         req.cookies.athenaToken ||
         req.query.token ||
