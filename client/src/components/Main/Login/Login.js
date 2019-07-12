@@ -1,26 +1,54 @@
 import React, { Component } from "react";
-
+import axios from "axios";
 import { LoginContainer, LoginRow, LoginCol, LoginV1 } from "./LoginCss";
 
-export class login extends Component {
+class login extends Component {
+  state = {
+    userToken: null,
+    aa: {
+      name: "123"
+    },
+    account: "",
+    password: ""
+  };
+
   componentDidMount() {}
 
   loginHandler = () => {
-    fetch("http://localhost:3000/login", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ account: "a18010", password: "123" })
-    })
-      .then(function(response) {
-        return response.json();
+    axios
+      .post("http://localhost:3001/login", {
+        account: this.state.account,
+        password: this.state.password
       })
-      .then(function(myJson) {
-        console.log(myJson);
-        document.cookie = "athenaToken=" + myJson.token;
+      .then(res => {
+        const data = res.data;
+        const successState = data.success;
+        const getData = data.data;
+
+        if (successState) {
+          let token = getData.token;
+          this.setState(prevState => ({
+            userToken: token,
+            aa: {
+              ...prevState.aa,
+              name: 321
+            }
+          }));
+
+          document.cookie = "athenaToken=" + token;
+        }
+      })
+      .catch(error => {
+        console.log(error);
       });
+  };
+
+  changeHandler = e => {
+    let name = e.target.name;
+    let txt = e.target.value;
+    this.setState(prevState => ({
+      [name]: txt
+    }));
   };
 
   render() {
@@ -31,10 +59,20 @@ export class login extends Component {
           <LoginCol>第三方</LoginCol>
           <LoginCol>
             <div>
-              <input type="text" />
+              <input
+                type="text"
+                name="account"
+                value={this.state.account}
+                onChange={this.changeHandler}
+              />
             </div>
             <div>
-              <input type="password" />
+              <input
+                type="password"
+                name="password"
+                value={this.state.password}
+                onChange={this.changeHandler}
+              />
             </div>
             <button onClick={this.loginHandler}>登入</button>
           </LoginCol>
