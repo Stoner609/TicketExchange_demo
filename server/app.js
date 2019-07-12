@@ -24,6 +24,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+// client 打包後的檔案
+app.use(express.static(path.join(__dirname, 'build')));
 
 app.use(cors());
 
